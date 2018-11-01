@@ -3,9 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
     'use strict'; 
 
     let screens = document.querySelectorAll(".module"),
+        moreTitleDiv = document.querySelectorAll(".module__info-show"),
         nextScrBtn = document.querySelectorAll(".next"),
         prevScrBtn = document.querySelectorAll(".prev"),
         mainScrBtn = document.querySelectorAll(".main-screen-path"),
+        moduleShowMoreBtn = document.querySelectorAll("#modulePlus"),
         counterSrc = 0;
 
     mainScrBtn.forEach(item => {
@@ -40,6 +42,29 @@ window.addEventListener('DOMContentLoaded', () => {
             screens[counterSrc].scrollIntoView({behavior: "smooth"});
         });
     });
+
+
+    moduleShowMoreBtn.forEach((item, i) => {
+        item.addEventListener('click', () =>{
+
+            let showMoreDiv = document.createElement("div");
+            
+            if (moreTitleDiv[i].classList.contains("module__info-show-accord")) {
+
+                moreTitleDiv[i].removeChild(moreTitleDiv[i].children[2]);
+                moreTitleDiv[i].classList.remove("module__info-show-accord");
+
+            } else{
+
+                moreTitleDiv[i].classList.add("module__info-show-accord");
+                showMoreDiv.classList.add("txt");
+                moreTitleDiv[i].appendChild(showMoreDiv);
+                showMoreDiv.innerHTML = 'Let us show you more information about it';
+
+            }
+        });
+    });
+    
 
 
 
