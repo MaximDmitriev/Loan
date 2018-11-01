@@ -150,7 +150,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    closeBtn.addEventListener('click', () => videoFrame.style.display = "none");
+    closeBtn.addEventListener('click', () => {
+        videoContent.setAttribute('src', 'none');
+        videoFrame.style.display = "none";
+    
+    });
 
 
 
