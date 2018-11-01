@@ -124,4 +124,22 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
+    //First screen video
+
+    let videoFrame = document.querySelector(".overlay"),
+        videoContent = document.querySelector("#frame"),
+        closeBtn = videoFrame.querySelector(".close"),
+        playBtn = document.querySelector("#showupVideo");
+
+
+    playBtn.addEventListener('click', () => {
+
+        videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
+        videoFrame.style.display = "flex";
+        
+    });
+
+    closeBtn.addEventListener('click', () => videoFrame.style.display = "none");
+
 });
