@@ -2,15 +2,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     'use strict';
 
-    //page slider
+    //page slider and show teacher
 
     
     let page = document.getElementsByClassName("page"),
         nextPageBtn = document.querySelectorAll(".next"),
         mainPageBtn = document.querySelectorAll(".main-page-path"),
+        modulesPage = document.querySelector(".modules"),
+        teacherDiv = modulesPage.querySelector(".hanson"),
         countPage = 1;
 
-        
+    teacherDiv.style.display ="none";
+    function showTeacher(){
+        teacherDiv.style.display ="block";
+    }
+
     mainPageBtn.forEach(item => {
 
         item.addEventListener('click', (event) => {
@@ -26,13 +32,17 @@ window.addEventListener('DOMContentLoaded', () => {
        
         item.addEventListener('click', (event) => {
             event.preventDefault();
+            
+            if (countPage == 3){setTimeout(showTeacher, 3000);}
+
             countPage = countPage + 2;
 
             if (i == 5){countPage = 1;}
 
             page[0].childNodes[countPage].scrollIntoView({behavior: "smooth"});
-        
+
         });
+
     });
         
 
@@ -137,9 +147,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
         videoFrame.style.display = "flex";
-        
+
     });
 
     closeBtn.addEventListener('click', () => videoFrame.style.display = "none");
+
+
+
 
 });
