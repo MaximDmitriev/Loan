@@ -6,12 +6,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     
     let page = document.getElementsByClassName("page"),
-        nextBtn = document.querySelectorAll(".next"),
+        nextPageBtn = document.querySelectorAll(".next"),
         mainPageBtn = document.querySelectorAll(".main-page-path"),
         countPage = 1;
+
         
-        
-    mainPageBtn.forEach((item) => {
+    mainPageBtn.forEach(item => {
 
         item.addEventListener('click', (event) => {
             event.preventDefault();
@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });    
     
     
-    nextBtn.forEach((item, i) => {
+    nextPageBtn.forEach((item, i) => {
        
         item.addEventListener('click', (event) => {
             event.preventDefault();
