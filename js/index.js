@@ -8,11 +8,12 @@ window.addEventListener('DOMContentLoaded', () => {
     let page = document.getElementsByClassName("page"),
         nextPageBtn = document.querySelectorAll(".next"),
         mainPageBtn = document.querySelectorAll(".main-page-path"),
-        modulesPage = document.querySelector(".modules"),
-        teacherDiv = modulesPage.querySelector(".hanson"),
+        modulesPage = document.querySelector(".modules"), // по возможности удалить
+        teacherDiv = document.querySelector("#hanson"),
         countPage = 1;
 
     teacherDiv.style.display ="none";
+
     function showTeacher(){
         teacherDiv.style.display ="block";
     }
@@ -157,6 +158,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 
+
+    // Modules
 
 
 });
