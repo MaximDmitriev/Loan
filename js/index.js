@@ -254,7 +254,7 @@ window.addEventListener('DOMContentLoaded', () => {
             } else if (num.length > 3 && num.length <= 6) {
                 inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3);
             } else if (num.length > 6 && num.length <= 10) {
-                inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3, 6) + " " + num.slice(6);
+                inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3, 6) + "-" + num.slice(6);
             }
             
         }
