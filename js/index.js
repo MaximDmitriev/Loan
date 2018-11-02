@@ -159,7 +159,80 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-    
+    // Form page 6
+
+    let message = {
+        loading: "Loading",
+        success: "Upload completed successfully",
+        failure: "Server Error. Try again later",
+    };
+
+    let formTime = document.querySelector("#formTime"),
+        inputFormTime = document.querySelectorAll("#formTime > .form__item > input"),
+        statusInfo = document.createElement("div");
+
+    statusInfo.style.paddingTop = 15 + "px";
+
+
+    function clearInput() {
+        for (let i=0; i < inputFormTime.length; i++) {
+            inputFormTime[i].value = '';
+        }
+        formTime.removeChild(statusInfo);
+    }
+
+
+    function sendFormTime() {
+        formTime.appendChild(statusInfo);
+
+
+        let formData = new FormData(formTime),
+            request = new XMLHttpRequest();
+
+        request.open('POST', '../server.php');
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        request.addEventListener('readystatechange', function() {
+
+            if (request.readyState < 4) {
+                statusInfo.innerHTML = message.loading;
+
+            } else if (request.readyState === 4 && request.status == 200) {
+                statusInfo.innerHTML = message.success;
+
+            } else {
+                statusInfo.innerHTML = message.failure;
+            }
+        });
+        request.send(formData);
+        setTimeout(clearInput, 2000);
+    }
+
+    inputFormTime[1].addEventListener('input', () => {
+        let re = /[а-яё]/gi;
+        inputFormTime[1].value = inputFormTime[1].value.replace(re, '');
+
+    });
+
+
+    inputFormTime[2].addEventListener('input', () => {
+        let re = /[^\d\/\.]/g;
+        inputFormTime[2].value = inputFormTime[2].value.replace(re, '');
+
+    });
+
+
+    formTime.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (inputFormTime[0].value != '' && inputFormTime[1].value != '' && inputFormTime[2].value != '') {
+            sendFormTime();
+        }
+        
+    });
+
+
+
 
 
 });
