@@ -65,7 +65,58 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
     
+// Downloads
 
+    let downloadBtn = document.querySelectorAll(".download");
+
+    function saveData(blob, fileName) // does the same as FileSaver.js
+    {
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+    
+        let url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+
+
+
+      downloadBtn.forEach((item) => {
+
+        item.addEventListener('click', () => {
+
+
+            let xhr = new XMLHttpRequest();
+            let requestUrl = "../schema robot.pdf";
+            xhr.open("GET", requestUrl);
+            xhr.responseType = "blob";
+
+            xhr.onload = function () {
+                saveData(this.response, 'schema robot.pdf'); // saveAs is now your function
+            };
+            xhr.send();
+
+
+
+
+            // let blob = new Blob(['GET'],{type: 'application/pdf'});
+
+            // let blobURL = window.URL.createObjectURL(blob);
+            // let tempLink = document.createElement('a');
+            // tempLink.style.display = 'none';
+            // tempLink.href = blobURL;
+            // tempLink.setAttribute('download', 'schema robot.pdf');
+
+            // document.body.appendChild(tempLink);
+            // tempLink.click();
+            // document.body.removeChild(tempLink);
+            // window.URL.revokeObjectURL(blobURL);
+         
+        });
+    });
 
 
 
