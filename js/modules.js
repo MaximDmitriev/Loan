@@ -65,12 +65,12 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-// Downloads
+    // Downloads
 
     let downloadBtn = document.querySelectorAll(".download");
 
-    function saveData(blob, fileName) // does the same as FileSaver.js
-    {
+    function downloadPdf(blob, fileName) {
+
         let a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";
@@ -88,35 +88,87 @@ window.addEventListener('DOMContentLoaded', () => {
 
         item.addEventListener('click', () => {
 
-
             let xhr = new XMLHttpRequest();
             let requestUrl = "../schema robot.pdf";
+
             xhr.open("GET", requestUrl);
             xhr.responseType = "blob";
 
             xhr.onload = function () {
-                saveData(this.response, 'schema robot.pdf'); // saveAs is now your function
+                downloadPdf(this.response, 'schema robot.pdf'); 
             };
-            xhr.send();
-
-
-
-
-            // let blob = new Blob(['GET'],{type: 'application/pdf'});
-
-            // let blobURL = window.URL.createObjectURL(blob);
-            // let tempLink = document.createElement('a');
-            // tempLink.style.display = 'none';
-            // tempLink.href = blobURL;
-            // tempLink.setAttribute('download', 'schema robot.pdf');
-
-            // document.body.appendChild(tempLink);
-            // tempLink.click();
-            // document.body.removeChild(tempLink);
-            // window.URL.revokeObjectURL(blobURL);
-         
+            xhr.send();         
         });
     });
+
+
+    // Video
+
+    let videoFrame = document.querySelector(".overlay"),
+        videoContent = document.querySelector("#frame"),
+        closeBtn = videoFrame.querySelector(".close"),
+        videoItemSecondary = document.querySelectorAll(".module__video > div:nth-child(2)"),
+        videoTitleSecondary = document.querySelectorAll(".module__video > div:nth-child(2) > .play > .play__text"),
+        playPrimaryBtn = document.querySelectorAll(".module__video > div:first-child > .play > .play__circle"),
+        playSecondaryBtn = document.querySelectorAll(".module__video > div:nth-child(2) > .play > .play__circle"),
+        urlVideo = document.querySelectorAll(".play");
+
+
+    function changeStyleVideo(num) {
+
+        let newBtn = playPrimaryBtn[0].cloneNode(true),
+            svg = playSecondaryBtn[num].getElementsByTagName("svg");
+    
+        playSecondaryBtn[num].removeChild(svg[0]);
+        playSecondaryBtn[num].appendChild(newBtn);
+        playSecondaryBtn[num].classList.remove("closed");
+        videoItemSecondary[num].style.filter = "none";
+        videoItemSecondary[num].style.opacity = 1;
+        videoTitleSecondary[num].classList.remove("attention");
+        videoTitleSecondary[num].innerHTML = "play video";
+    }
+
+
+    function playVideo(num){
+
+        videoContent.setAttribute('src', urlVideo[num].getAttribute('data-url'));
+        videoFrame.style.display = "flex";
+
+
+        closeBtn.addEventListener('click', () => {
+            videoContent.setAttribute('src', 'none');
+            videoFrame.style.display = "none";
+        });
+    }
+
+
+    playPrimaryBtn.forEach((item, i) => {
+
+        item.addEventListener('click', () => {
+
+            if(playSecondaryBtn[i].classList.contains("closed")) {
+                playVideo(i * 2);
+                changeStyleVideo(i);
+
+            } else{
+                playVideo(i * 2);
+            }
+        });
+    });
+
+    playSecondaryBtn.forEach((item, i) => {
+
+        item.addEventListener('click', () => {
+
+            if(!item.classList.contains("closed")) {
+                playVideo(i * 2 + 1);
+            }  
+        });
+    });
+
+
+
+  
 
 
 
