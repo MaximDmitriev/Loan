@@ -34,71 +34,73 @@ window.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', (event) => {
             event.preventDefault();
             
-            if (countPage == 3){setTimeout(showTeacher, 3000);}
+            if (countPage == 3) {setTimeout(showTeacher, 3000);}
 
             countPage = countPage + 2;
 
-            if (i == 5){countPage = 1;}
+            if (i == 5) {countPage = 1;}
 
             page[0].childNodes[countPage].scrollIntoView({behavior: "smooth"});
 
         });
 
     });
+
+    // To modules
         
 
 
     // Showup slider (убрать в функции показать и скрыть)
 
-    let showSliderPrevBtn = document.querySelector("#showupSliderPrev"),
-        showSliderNextBtn = document.querySelector("#showupSliderNext"),
-        showupSlider = document.querySelector(".showup__content-slider"),
-        showupSliderCard = showupSlider.querySelectorAll("a"),
-        countSlide = 1;
+    // let showSliderPrevBtn = document.querySelector("#showupSliderPrev"),
+    //     showSliderNextBtn = document.querySelector("#showupSliderNext"),
+    //     showupSlider = document.querySelector(".showup__content-slider"),
+    //     showupSliderCard = showupSlider.querySelectorAll("a"),
+    //     countSlide = 1;
 
-    showupSliderCard.forEach((item) =>  {
-        item.style.display = "none";
-        item.classList.remove("card-active");
-    });
+    // showupSliderCard.forEach((item) =>  {
+    //     item.style.display = "none";
+    //     item.classList.remove("card-active");
+    // });
 
-    showupSliderCard[0].style.display = "block";
-    showupSliderCard[0].classList.add("card-active")
+    // showupSliderCard[0].style.display = "block";
+    // showupSliderCard[0].classList.add("card-active")
 
-    showSliderNextBtn.addEventListener('click', () => {
+    // showSliderNextBtn.addEventListener('click', () => {
      
-        showupSliderCard.forEach((item) =>  {
-            item.style.display = "none";
-            item.classList.remove("card-active");
-        });
+    //     showupSliderCard.forEach((item) =>  {
+    //         item.style.display = "none";
+    //         item.classList.remove("card-active");
+    //     });
 
-        showupSliderCard[countSlide].style.display = "block";
-        showupSliderCard[countSlide].classList.add("card-active");
+    //     showupSliderCard[countSlide].style.display = "block";
+    //     showupSliderCard[countSlide].classList.add("card-active");
              
-        if(countSlide > showupSliderCard.length - 2) {
-            countSlide = 0;
+    //     if(countSlide > showupSliderCard.length - 2) {
+    //         countSlide = 0;
 
-        } else{ 
-            countSlide++;
-            }     
-    });
+    //     } else{ 
+    //         countSlide++;
+    //         }     
+    // });
 
-    showSliderPrevBtn.addEventListener('click', () => {
+    // showSliderPrevBtn.addEventListener('click', () => {
        
-        showupSliderCard.forEach((item) =>  {
-            item.style.display = "none";
-            item.classList.remove("card-active");
-        });
+    //     showupSliderCard.forEach((item) =>  {
+    //         item.style.display = "none";
+    //         item.classList.remove("card-active");
+    //     });
 
-        showupSliderCard[countSlide].style.display = "block";
-        showupSliderCard[countSlide].classList.add("card-active");
+    //     showupSliderCard[countSlide].style.display = "block";
+    //     showupSliderCard[countSlide].classList.add("card-active");
         
-        if(countSlide < 1) {
-            countSlide = 7;
+    //     if(countSlide < 1) {
+    //         countSlide = 7;
 
-        } else{ 
-            countSlide--;
-            }
-    });
+    //     } else{ 
+    //         countSlide--;
+    //         }
+    // });
 
 
     //Differences Lists
@@ -233,45 +235,191 @@ window.addEventListener('DOMContentLoaded', () => {
     let formHelp = document.querySelector("#formHelp"),
         inputFormHelp = formHelp.getElementsByTagName("input");
 
-        formHelp.addEventListener('submit', (event) => {
-            event.preventDefault();
+    formHelp.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-            if (inputFormHelp[0].value != '' && inputFormHelp[1].value != '' && inputFormHelp[2].value != '' && inputFormHelp[3].value != '') {
-            sendFormTime(formHelp, inputFormHelp);
-            }
-        });
-
-        inputFormHelp[2].addEventListener('input', () => {
-            let re = /[а-яё]/gi;
-            inputFormHelp[2].value = inputFormHelp[2].value.replace(re, '');
-    
-        });
-
-        function getMask(num) {
-            let start = "+1 (";
-            if (num.length > 0 && num.length <= 3 ){
-                inputFormHelp[3].value = start + num;
-            } else if (num.length > 3 && num.length <= 6) {
-                inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3);
-            } else if (num.length > 6 && num.length <= 10) {
-                inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3, 6) + "-" + num.slice(6);
-            }
-            
+        if (inputFormHelp[0].value != '' && inputFormHelp[1].value != '' && inputFormHelp[2].value != '' && inputFormHelp[3].value != '') {
+        sendFormTime(formHelp, inputFormHelp);
         }
+    });
 
-        inputFormHelp[3].addEventListener('input', (event) => {
-            event.preventDefault();
-            let re = /[\D]/g;
-            let number = inputFormHelp[3].value.replace(re, '');
-            
-            if (number.length > 1 && number.length <= 10) {
-                   number = number.slice(1);
-            } else if (number.length > 10){
-                number = number.slice(1,11);
-            }
-            getMask(number);
-           
+    inputFormHelp[2].addEventListener('input', () => {
+        let re = /[а-яё]/gi;
+        inputFormHelp[2].value = inputFormHelp[2].value.replace(re, '');
+
+    });
+
+    function getMask(num) {
+        let start = "+1 (";
+        if (num.length > 0 && num.length <= 3 ){
+            inputFormHelp[3].value = start + num;
+        } else if (num.length > 3 && num.length <= 6) {
+            inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3);
+        } else if (num.length > 6 && num.length <= 10) {
+            inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3, 6) + "-" + num.slice(6);
+        }
+        
+    }
+
+    inputFormHelp[3].addEventListener('input', (event) => {
+        event.preventDefault();
+        let re = /[\D]/g;
+        let number = inputFormHelp[3].value.replace(re, '');
+        
+        if (number.length > 1 && number.length <= 10) {
+                number = number.slice(1);
+        } else if (number.length > 10){
+            number = number.slice(1,11);
+        }
+        getMask(number);
+        
+    });
+
+    // Modules Slider
+
+    let modulesSlNextBtn = document.querySelector("#modulesSliderNext"),
+        modulesSlPrevBtn = document.querySelector("#modulesSliderPrev"),
+        modulesSlider = document.querySelector(".modules__content-slider"),
+        modulesCard = document.querySelectorAll(".modules__content-slider > a"),
+        sliderCount = 0;
+
+
+    console.log(modulesCard);
+
+    function showFirst() {
+        sliderCount = 0;
+        modulesCard.forEach((item) => {
+            item.classList.remove("card-active");
+            item.style.display = 'none';
+            item.style.position = "absolute";
         });
+
+        let a = 0;
+
+        for (let i = sliderCount; i < sliderCount + 3; i++) {
+            
+            modulesCard[i].style.display = "inline-block";
+            modulesCard[i].style.position = "absolute";
+            modulesCard[i].style.left = 324 * a + "px";
+            
+            a++;
+        }
+        
+        setTimeout(function(){modulesCard[0].classList.add("card-active");}, 50);
+        console.log(sliderCount);
+        sliderCount++;
+    }
+
+    function moveIn() {
+        modulesCard.forEach((item) => {
+            item.classList.remove("card-active");
+        });
+
+        let leftNowSecond = 648,
+            leftNow = 324,
+            leftNew = 0;
+        
+        let scroller = setInterval(function() {
+            
+            let scrollBy = 324 / 30;
+                
+            if(scrollBy > leftNow - leftNew) {
+
+                leftNow = leftNow - scrollBy;
+                leftNowSecond = leftNowSecond - scrollBy;
+                
+                modulesCard[sliderCount].style.left = leftNow + "px";
+                if(sliderCount < 6){
+                    modulesCard[sliderCount + 1].style.left = leftNowSecond + "px";
+                }
+                            
+            } else {
+
+                modulesCard[sliderCount].style.left = "0px";
+                if(sliderCount < 6){
+                    modulesCard[sliderCount + 1].style.left = "324px";
+                }
+                modulesCard[sliderCount - 1].style.display = "none";
+
+                clearInterval(scroller);
+                leftNow = 0;
+                }
+        }, 17);
+
+        
+
+        setTimeout(function(){
+            
+            if(sliderCount < 5){
+                modulesCard[sliderCount + 2].style.display = "inline-block";
+                modulesCard[sliderCount + 2].style.left = "648px";
+                sliderCount++;
+            } else {
+            sliderCount++;
+            }
+
+        }, 400);
+    }
+
+    showFirst();
+
+    // автомат
+    let toSlide = setInterval(function() {
+        slideForward();
+    }, 4000);
+
+    // ручками перелистываем вперед
+    function slideForward() {
+        console.log(sliderCount);
+
+        if (sliderCount > 6) {
+            showFirst();
+        } else {
+            moveIn();
+            modulesCard[sliderCount].classList.add("card-active");
+        } 
+    }
+
+    // клик вперед
+    modulesSlNextBtn.addEventListener('click', () => {
+        clearInterval(toSlide);
+        slideForward();
+        toSlide = setInterval(function() {
+            slideForward();
+        }, 4000);
+                    
+
+
+    });
+
+
+
+
+        // ///-----------------------------
+
+        // modulesSlPrevBtn.addEventListener('click', () => {
+        //     leftNew = leftNow + 320;
+            
+        //     let scroller = setInterval(function() {
+        //         let scrollBy = 320 / 30;
+                
+        //           if(scrollBy > leftNow -leftNew) {
+        //             leftNow = leftNow + scrollBy;
+        //             modulesSlider.style.left = leftNow + "px";
+        //           } else {
+        //             modulesSlider.style.left = leftNew + "px";
+        //             clearInterval(scroller);
+        //             leftNow = leftNew;
+        //           }
+        //         }, 17);
+
+        //     // sliderCount--;
+        // });
+
+
+
+
+
 
 
 });

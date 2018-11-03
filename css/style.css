@@ -384,7 +384,7 @@ a:active {
 }
 .showup__content-slider {
   position: relative;
-  width: 860px;
+  width: 2700px;
 }
 .showup__content-slider .slick-prev {
   position: absolute;
@@ -427,7 +427,7 @@ a:active {
           transform: translateX(-45%) translateY(-50%);
 }
 .showup__content-slider .card {
-  display: block;
+  display: inline-block;
   width: 307px;
   height: 227px;
   border-radius: 8px;
@@ -845,7 +845,7 @@ a:active {
 }
 .modules__content-slider {
   position: relative;
-  width: 860px;
+  width: 2600px;
   margin-top: 120px;
   -webkit-transform: translateX(-144px);
           transform: translateX(-144px);
@@ -904,7 +904,7 @@ a:active {
   fill: #6D53AF;
 }
 .modules__content-slider .card {
-  display: block;
+  display: inline-block;
   width: 296px;
   height: 417px;
   border-radius: 8px;
