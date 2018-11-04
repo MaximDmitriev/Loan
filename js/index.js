@@ -50,57 +50,75 @@ window.addEventListener('DOMContentLoaded', () => {
         
 
 
-    // Showup slider (убрать в функции показать и скрыть)
+    // Showup slider
 
-    // let showSliderPrevBtn = document.querySelector("#showupSliderPrev"),
-    //     showSliderNextBtn = document.querySelector("#showupSliderNext"),
-    //     showupSlider = document.querySelector(".showup__content-slider"),
-    //     showupSliderCard = showupSlider.querySelectorAll("a"),
-    //     countSlide = 1;
+    let showSliderPrevBtn = document.querySelector("#showupSliderPrev"),
+        showSliderNextBtn = document.querySelector("#showupSliderNext"),
+        showupSlider = document.querySelector(".showup__content-slider"),
+        showupSliderCard = showupSlider.querySelectorAll("a"),
+        showUpHelper = [];
 
-    // showupSliderCard.forEach((item) =>  {
-    //     item.style.display = "none";
-    //     item.classList.remove("card-active");
-    // });
+    showupSlider.style.display = "flex";
 
-    // showupSliderCard[0].style.display = "block";
-    // showupSliderCard[0].classList.add("card-active")
+    for (let i = 0; i < showupSliderCard.length; i++) {
+        showupSliderCard[i].style.display = "none";
+        showUpHelper.push(showupSliderCard[i]);
+    }
 
-    // showSliderNextBtn.addEventListener('click', () => {
-     
-    //     showupSliderCard.forEach((item) =>  {
-    //         item.style.display = "none";
-    //         item.classList.remove("card-active");
-    //     });
-
-    //     showupSliderCard[countSlide].style.display = "block";
-    //     showupSliderCard[countSlide].classList.add("card-active");
-             
-    //     if(countSlide > showupSliderCard.length - 2) {
-    //         countSlide = 0;
-
-    //     } else{ 
-    //         countSlide++;
-    //         }     
-    // });
-
-    // showSliderPrevBtn.addEventListener('click', () => {
-       
-    //     showupSliderCard.forEach((item) =>  {
-    //         item.style.display = "none";
-    //         item.classList.remove("card-active");
-    //     });
-
-    //     showupSliderCard[countSlide].style.display = "block";
-    //     showupSliderCard[countSlide].classList.add("card-active");
+    showUpShow();
+    
+    function showUpShow() {
         
-    //     if(countSlide < 1) {
-    //         countSlide = 7;
+        for (let i = 0; i < 3; i++) {
+            showUpHelper[i].style.order = i;
+            showUpHelper[i].style.display = "inline-block";
+         }
+        
+        setTimeout(() => {
+            showUpHelper[0].classList.add("slick-current");
+        }, 20);
+    }
+     
+    function showUpHide() {
 
-    //     } else{ 
-    //         countSlide--;
-    //         }
-    // });
+
+        showupSliderCard.forEach((item) => {
+            item.style.display = "none";
+            item.classList.remove("slick-current");
+        });
+        setTimeout(() => {
+            for (let i = 0; i < 3; i++) {
+                showUpHelper[i].classList.remove("slick-current");
+             }
+        }, 50);
+    }
+
+    function slideRight(){
+        showUpHide();
+        let temp = showUpHelper[showUpHelper.length - 1];
+        showUpHelper.pop();
+        showUpHelper.unshift(temp);
+
+        setTimeout(() => {
+            showUpShow();
+        }, 50);
+    }
+
+    function slideLeft(){
+        showUpHide();
+        let temp = showUpHelper[0];
+        showUpHelper.shift();
+        showUpHelper.push(temp);
+
+        setTimeout(() => {
+            showUpShow();
+        }, 50);
+    }
+
+    showSliderNextBtn.addEventListener('click', () => slideRight());
+
+    showSliderPrevBtn.addEventListener('click', () => slideLeft());
+
 
 
     //Differences Lists
@@ -125,7 +143,6 @@ window.addEventListener('DOMContentLoaded', () => {
         parentDiv.children[num].appendChild(cardInfo);
         parentDiv.children[num].children[1].classList.add("card__descr");
         parentDiv.children[num].children[1].innerHTML = "Some descriptions";
-
     }
 
     moreCardsBtn.addEventListener('click', () => {
@@ -323,10 +340,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextSlide(){
+        modulesCard.forEach((item) => {                   
+            item.style.display = "none";
+        });
+
         let temp = helper[0];
         helper.shift();
         helper.push(temp);
-
+        
         newOrder(fade);
     }
 

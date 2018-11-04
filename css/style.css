@@ -382,14 +382,10 @@ a:active {
   letter-spacing: -0.56px;
   margin-right: 43px;
 }
-.showup__content-slider {
-  position: relative;
-  width: 2700px;
-}
-.showup__content-slider .slick-prev {
+.showup__content-title .slick-prev {
   position: absolute;
-  bottom: 0px;
-  left: -330px;
+  bottom: 50px;
+  left: 60px;
   width: 43px;
   height: 43px;
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -397,7 +393,7 @@ a:active {
   background-color: transparent;
   cursor: pointer;
 }
-.showup__content-slider .slick-prev svg {
+.showup__content-title .slick-prev svg {
   position: absolute;
   width: 12px;
   height: 12px;
@@ -406,10 +402,10 @@ a:active {
   -webkit-transform: translateX(-65%) translateY(-50%);
           transform: translateX(-65%) translateY(-50%);
 }
-.showup__content-slider .slick-next {
+.showup__content-title .slick-next {
   position: absolute;
-  bottom: 0px;
-  left: -280px;
+  bottom: 50px;
+  left: 110px;
   width: 43px;
   height: 43px;
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -417,7 +413,7 @@ a:active {
   background-color: transparent;
   cursor: pointer;
 }
-.showup__content-slider .slick-next svg {
+.showup__content-title .slick-next svg {
   position: absolute;
   width: 12px;
   height: 12px;
@@ -426,8 +422,11 @@ a:active {
   -webkit-transform: translateX(-45%) translateY(-50%);
           transform: translateX(-45%) translateY(-50%);
 }
+.showup__content-slider {
+  position: relative;
+  width: 860px;
+}
 .showup__content-slider .card {
-  display: inline-block;
   width: 307px;
   height: 227px;
   border-radius: 8px;
