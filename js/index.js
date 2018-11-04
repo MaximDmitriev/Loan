@@ -8,7 +8,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let page = document.getElementsByClassName("page"),
         nextPageBtn = document.querySelectorAll(".next"),
         mainPageBtn = document.querySelectorAll(".main-page-path"),
-        modulesPage = document.querySelector(".modules"), // по возможности удалить
+        // modulesPage = document.querySelector(".modules"), // по возможности удалить
         teacherDiv = document.querySelector("#hanson"),
         countPage = 1;
 
@@ -25,10 +25,8 @@ window.addEventListener('DOMContentLoaded', () => {
             page[0].childNodes[1].scrollIntoView({behavior: "smooth"});
             countPage = 1;
         });
-
     });    
-    
-    
+      
     nextPageBtn.forEach((item, i) => {
        
         item.addEventListener('click', (event) => {
@@ -41,13 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
             if (i == 5) {countPage = 1;}
 
             page[0].childNodes[countPage].scrollIntoView({behavior: "smooth"});
-
         });
-
     });
-
-    // To modules
-        
 
 
     // Showup slider
@@ -120,7 +113,6 @@ window.addEventListener('DOMContentLoaded', () => {
     showSliderPrevBtn.addEventListener('click', () => slideLeft());
 
 
-
     //Differences Lists
 
     let parentDiv = document.querySelector(".officernew"),
@@ -162,18 +154,15 @@ window.addEventListener('DOMContentLoaded', () => {
         closeBtn = videoFrame.querySelector(".close"),
         playBtn = document.querySelector("#showupVideo");
 
-
     playBtn.addEventListener('click', () => {
 
         videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
         videoFrame.style.display = "flex";
-
     });
 
     closeBtn.addEventListener('click', () => {
         videoContent.setAttribute('src', 'none');
         videoFrame.style.display = "none";
-    
     });
 
 
@@ -230,13 +219,11 @@ window.addEventListener('DOMContentLoaded', () => {
     inputFormTime[1].addEventListener('input', () => {
         let re = /[а-яё]/gi;
         inputFormTime[1].value = inputFormTime[1].value.replace(re, '');
-
     });
 
     inputFormTime[2].addEventListener('input', () => {
         let re = /[^\d\/\.]/g;
         inputFormTime[2].value = inputFormTime[2].value.replace(re, '');
-
     });
 
     formTime.addEventListener('submit', (event) => {
@@ -263,7 +250,6 @@ window.addEventListener('DOMContentLoaded', () => {
     inputFormHelp[2].addEventListener('input', () => {
         let re = /[а-яё]/gi;
         inputFormHelp[2].value = inputFormHelp[2].value.replace(re, '');
-
     });
 
     function getMask(num) {
@@ -274,8 +260,7 @@ window.addEventListener('DOMContentLoaded', () => {
             inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3);
         } else if (num.length > 6 && num.length <= 10) {
             inputFormHelp[3].value = start + num.slice(0, 3) + ") " + num.slice(3, 6) + "-" + num.slice(6);
-        }
-        
+        }   
     }
 
     inputFormHelp[3].addEventListener('input', (event) => {
@@ -288,8 +273,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else if (number.length > 10){
             number = number.slice(1,11);
         }
-        getMask(number);
-        
+        getMask(number);   
     });
 
     // Modules Slider
@@ -322,11 +306,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 helper[i].style.order = i;
                 helper[i].classList.remove("card-active");
             }
-     
-           callback();
+            callback();
     }
 
     function fade(){
+
         for (let i = 0; i < helper.length; i++) {
             helper[i].style.display = "inline-block";
         }
@@ -340,6 +324,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextSlide(){
+
         modulesCard.forEach((item) => {                   
             item.style.display = "none";
         });
@@ -352,6 +337,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function prevSlide(){
+        
         let temp = helper[7];
         helper.pop();
         helper.unshift(temp);
@@ -382,10 +368,80 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 
+// Slider 5 (Feed)
 
+    let feedSlider = document.querySelector(".feed__slider"),
+        feedCard = document.querySelectorAll(".feed__item "),
+        feedNextBtn = document.querySelector("#feedNext"),
+        feedPrevBtn = document.querySelector("#feedPrev"),
+        tempDiv = document.createElement("div"),
+        feedHelper = [];
 
+    feedSlider.style.display = "flex";
 
+    for (let i = 0; i < feedCard.length; i++) {
+        feedCard[i].style.display = "none";
+        feedCard[i].classList.remove("feed__item-active");
+        feedHelper.push(feedCard[i]);
+    }
 
+    feedShow();
+ 
+    function feedShow() {
+                
+        for (let i = 0; i < 4; i++) {
+            feedHelper[i].style.order = i;
+            feedHelper[i].style.display = "inline-block";
+        }
+        tempDiv.textContent = feedHelper[0].children[4].textContent;
+        feedHelper[0].children[4].textContent = "";
+            
+        setTimeout(() => {
+            
+            feedHelper[0].classList.add("feed__item-active");
+            
+            setTimeout(() => {
+                feedHelper[0].children[4].textContent = tempDiv.textContent;
+            }, 500);
+        }, 20);
+    }
+
+    function feedHide() {
+
+        feedCard.forEach((item) => {
+            item.style.display = "none";
+        });
+
+        setTimeout(() => {
+            for (let i = 0; i < 4; i++) {
+                feedHelper[i].classList.remove("feed__item-active");
+             }
+        }, 5);
+    }
+
+    feedNextBtn.addEventListener('click', () => {
+
+        feedHide();
+        let temp = feedHelper[feedHelper.length - 1];
+        feedHelper.pop();
+        feedHelper.unshift(temp);
+
+        setTimeout(() => {
+            feedShow();
+        }, 10);
+    });
+
+    feedPrevBtn.addEventListener('click', () => {
+        
+        feedHide();
+        let temp = feedHelper[0];
+        feedHelper.shift();
+        feedHelper.push(temp);
+
+        setTimeout(() => {
+            feedShow();
+        }, 10);
+    });
 
 
 
