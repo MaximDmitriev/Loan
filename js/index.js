@@ -280,141 +280,88 @@ window.addEventListener('DOMContentLoaded', () => {
     let modulesSlNextBtn = document.querySelector("#modulesSliderNext"),
         modulesSlPrevBtn = document.querySelector("#modulesSliderPrev"),
         modulesSlider = document.querySelector(".modules__content-slider"),
-        modulesCard = document.querySelectorAll(".modules__content-slider > a"),
-        sliderCount = 0;
+        modulesCard = document.querySelectorAll(".modules__content-slider > a");
+        // sliderCount = 0;
 
 
-    console.log(modulesCard);
+    modulesSlider.style.display = "flex";
 
-    function showFirst() {
-        sliderCount = 0;
-        modulesCard.forEach((item) => {
-            item.classList.remove("card-active");
-            item.style.display = 'none';
-            item.style.position = "absolute";
-        });
+    let helper = [];
 
-        let a = 0;
-
-        for (let i = sliderCount; i < sliderCount + 3; i++) {
-            
-            modulesCard[i].style.display = "inline-block";
-            modulesCard[i].style.position = "absolute";
-            modulesCard[i].style.left = 324 * a + "px";
-            
-            a++;
-        }
-        
-        setTimeout(function(){modulesCard[0].classList.add("card-active");}, 50);
-        console.log(sliderCount);
-        sliderCount++;
+    for (let i = 0; i < modulesCard.length; i++) {
+        helper.push(modulesCard[i]);
     }
+        
+    function newOrder(callback) {
 
-    function moveIn() {
         modulesCard.forEach((item) => {
-            item.classList.remove("card-active");
+            item.style.transition = "0.01s";
         });
-
-        let leftNowSecond = 648,
-            leftNow = 324,
-            leftNew = 0;
         
-        let scroller = setInterval(function() {
-            
-            let scrollBy = 324 / 30;
+            for (let i = 0; i < helper.length; i++) {
                 
-            if(scrollBy > leftNow - leftNew) {
-
-                leftNow = leftNow - scrollBy;
-                leftNowSecond = leftNowSecond - scrollBy;
-                
-                modulesCard[sliderCount].style.left = leftNow + "px";
-                if(sliderCount < 6){
-                    modulesCard[sliderCount + 1].style.left = leftNowSecond + "px";
-                }
-                            
-            } else {
-
-                modulesCard[sliderCount].style.left = "0px";
-                if(sliderCount < 6){
-                    modulesCard[sliderCount + 1].style.left = "324px";
-                }
-                modulesCard[sliderCount - 1].style.display = "none";
-
-                clearInterval(scroller);
-                leftNow = 0;
-                }
-        }, 17);
-
-        
-
-        setTimeout(function(){
-            
-            if(sliderCount < 5){
-                modulesCard[sliderCount + 2].style.display = "inline-block";
-                modulesCard[sliderCount + 2].style.left = "648px";
-                sliderCount++;
-            } else {
-            sliderCount++;
+                helper[i].style.opacity = 0;
+                helper[i].style.display = "none";
+                helper[i].style.order = i;
+                helper[i].classList.remove("card-active");
             }
-
-        }, 400);
+     
+           callback();
     }
 
-    showFirst();
+    function fade(){
+        for (let i = 0; i < helper.length; i++) {
+            helper[i].style.display = "inline-block";
+        }
+        setTimeout(() => {
+            for (let i = 0; i < helper.length; i++) {
+                helper[i].style.transition = "1s";
+                helper[i].style.opacity = 1;
+            }
+            helper[0].classList.add("card-active");
+        }, 300);
+    }
 
-    // автомат
+    function nextSlide(){
+        let temp = helper[0];
+        helper.shift();
+        helper.push(temp);
+
+        newOrder(fade);
+    }
+
+    function prevSlide(){
+        let temp = helper[7];
+        helper.pop();
+        helper.unshift(temp);
+
+        newOrder(fade);
+    }
+
     let toSlide = setInterval(function() {
-        slideForward();
+        nextSlide();
     }, 4000);
 
-    // ручками перелистываем вперед
-    function slideForward() {
-        console.log(sliderCount);
-
-        if (sliderCount > 6) {
-            showFirst();
-        } else {
-            moveIn();
-            modulesCard[sliderCount].classList.add("card-active");
-        } 
-    }
-
-    // клик вперед
     modulesSlNextBtn.addEventListener('click', () => {
+
         clearInterval(toSlide);
-        slideForward();
+        nextSlide();
         toSlide = setInterval(function() {
-            slideForward();
+            nextSlide();
         }, 4000);
-                    
+    });
 
+    modulesSlPrevBtn.addEventListener('click', () => {
 
+        clearInterval(toSlide);
+        prevSlide();
+        toSlide = setInterval(function() {
+            nextSlide();
+        }, 4000);
     });
 
 
 
-
-        // ///-----------------------------
-
-        // modulesSlPrevBtn.addEventListener('click', () => {
-        //     leftNew = leftNow + 320;
-            
-        //     let scroller = setInterval(function() {
-        //         let scrollBy = 320 / 30;
-                
-        //           if(scrollBy > leftNow -leftNew) {
-        //             leftNow = leftNow + scrollBy;
-        //             modulesSlider.style.left = leftNow + "px";
-        //           } else {
-        //             modulesSlider.style.left = leftNew + "px";
-        //             clearInterval(scroller);
-        //             leftNow = leftNew;
-        //           }
-        //         }, 17);
-
-        //     // sliderCount--;
-        // });
 
 
 
