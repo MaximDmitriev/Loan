@@ -9,15 +9,11 @@ window.addEventListener('DOMContentLoaded', () => {
         mainScrBtn = document.querySelectorAll(".main-screen-path"),
         moduleShowMoreBtn = document.querySelectorAll("#modulePlus"),
         counterSrc = 0;
+  
 
-    mainScrBtn.forEach(item => {
-
-        item.addEventListener('click', (event) => {
-            event.preventDefault();
-            screens[0].scrollIntoView({behavior: "smooth"});
-            counterSrc = 0;
-        });
-    });    
+    mainScrBtn.forEach((item) => {
+        item.setAttribute("href", "./index.html#1");
+    });
     
     nextScrBtn.forEach((item) => {
        

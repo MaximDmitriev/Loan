@@ -2,13 +2,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     'use strict';
 
-    //page slider and show teacher
+    //Page slider and Show teacher
 
-    
     let page = document.getElementsByClassName("page"),
         nextPageBtn = document.querySelectorAll(".next"),
         mainPageBtn = document.querySelectorAll(".main-page-path"),
-        // modulesPage = document.querySelector(".modules"), // по возможности удалить
         teacherDiv = document.querySelector("#hanson"),
         countPage = 1;
 
@@ -43,15 +41,24 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Showup slider
+    // Showup slider & Route
 
     let showSliderPrevBtn = document.querySelector("#showupSliderPrev"),
         showSliderNextBtn = document.querySelector("#showupSliderNext"),
         showupSlider = document.querySelector(".showup__content-slider"),
         showupSliderCard = showupSlider.querySelectorAll("a"),
+        showupBtn = document.querySelector("#showupPlus"),
         showUpHelper = [];
 
     showupSlider.style.display = "flex";
+
+    showupSliderCard.forEach((item, i) => {
+        item.setAttribute("href", `./modules.html#${i + 1}`);
+    });
+
+    showupBtn.addEventListener('click', () => {
+        showupSliderCard[0].click();
+    });
 
     for (let i = 0; i < showupSliderCard.length; i++) {
         showupSliderCard[i].style.display = "none";
@@ -74,7 +81,6 @@ window.addEventListener('DOMContentLoaded', () => {
      
     function showUpHide() {
 
-
         showupSliderCard.forEach((item) => {
             item.style.display = "none";
             item.classList.remove("slick-current");
@@ -87,6 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function slideRight(){
+
         showUpHide();
         let temp = showUpHelper[showUpHelper.length - 1];
         showUpHelper.pop();
@@ -98,6 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function slideLeft(){
+
         showUpHide();
         let temp = showUpHelper[0];
         showUpHelper.shift();
@@ -121,6 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
         countList = 1;
 
     function addCard(num) {
+
         let newCard = document.createElement("div"),
             cardNumber = document.createElement("div"),
             cardInfo = document.createElement("div");
@@ -138,6 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     moreCardsBtn.addEventListener('click', () => {
+
         addCard(countList);
         countList++;
 
@@ -155,7 +165,6 @@ window.addEventListener('DOMContentLoaded', () => {
         playBtn = document.querySelector("#showupVideo");
 
     playBtn.addEventListener('click', () => {
-
         videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
         videoFrame.style.display = "flex";
     });
@@ -185,6 +194,7 @@ window.addEventListener('DOMContentLoaded', () => {
     function sendFormTime(formName, inputname) {
 
         function clearInput() {
+
             for (let i=0; i < inputname.length; i++) {
                 inputname[i].value = '';
             }
@@ -234,7 +244,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }   
     });
 
-    // Form let us help
+    // Form "Let us help"
 
     let formHelp = document.querySelector("#formHelp"),
         inputFormHelp = formHelp.getElementsByTagName("input");
@@ -253,6 +263,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     function getMask(num) {
+
         let start = "+1 (";
         if (num.length > 0 && num.length <= 3 ){
             inputFormHelp[3].value = start + num;
@@ -282,8 +293,6 @@ window.addEventListener('DOMContentLoaded', () => {
         modulesSlPrevBtn = document.querySelector("#modulesSliderPrev"),
         modulesSlider = document.querySelector(".modules__content-slider"),
         modulesCard = document.querySelectorAll(".modules__content-slider > a");
-        // sliderCount = 0;
-
 
     modulesSlider.style.display = "flex";
 
@@ -337,7 +346,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function prevSlide(){
-        
+
         let temp = helper[7];
         helper.pop();
         helper.unshift(temp);
@@ -442,8 +451,4 @@ window.addEventListener('DOMContentLoaded', () => {
             feedShow();
         }, 10);
     });
-
-
-
-
 });
