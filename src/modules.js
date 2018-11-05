@@ -124,16 +124,16 @@ window.addEventListener('DOMContentLoaded', () => {
         videoTitleSecondary[num].innerHTML = "play video";
     }
     
-    videoContent.setAttribute('src', '');
-
     function playVideo(num){
 
         videoContent.setAttribute('src', urlVideo[num].getAttribute('data-url'));
-        videoFrame.style.display = "flex";
-
+        
+        videoContent.addEventListener('load', () => {
+            videoFrame.style.display = "flex";
+        }, {once: true});
 
         closeBtn.addEventListener('click', () => {
-            videoContent.setAttribute('src', '');
+            videoContent.setAttribute('src', 'none');
             videoFrame.style.display = "none";
         });
     }

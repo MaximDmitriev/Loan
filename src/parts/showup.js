@@ -86,15 +86,18 @@ function showup() {
         closeBtn = videoFrame.querySelector(".close"),
         playBtn = document.querySelector("#showupVideo");
 
-    videoContent.setAttribute('src', '');
-
+    
     playBtn.addEventListener('click', () => {
         videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
-        videoFrame.style.display = "flex";
+
+        videoContent.addEventListener('load', () => {
+            videoFrame.style.display = "flex";
+        }, {once: true});
+       
     });
 
     closeBtn.addEventListener('click', () => {
-        videoContent.setAttribute('src', '');
+        videoContent.setAttribute('src', 'none');
         videoFrame.style.display = "none";
     });
 }
