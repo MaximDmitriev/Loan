@@ -86,13 +86,15 @@ function showup() {
         closeBtn = videoFrame.querySelector(".close"),
         playBtn = document.querySelector("#showupVideo");
 
+    videoContent.setAttribute('src', '');
+
     playBtn.addEventListener('click', () => {
         videoContent.setAttribute('src', playBtn.getAttribute('data-url'));
         videoFrame.style.display = "flex";
     });
 
     closeBtn.addEventListener('click', () => {
-        videoContent.setAttribute('src', 'none');
+        videoContent.setAttribute('src', '');
         videoFrame.style.display = "none";
     });
 }

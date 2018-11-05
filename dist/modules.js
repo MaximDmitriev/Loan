@@ -124,6 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
         videoTitleSecondary[num].innerHTML = "play video";
     }
 
+    videoContent.setAttribute('src', '');
 
     function playVideo(num){
 
@@ -132,7 +133,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         closeBtn.addEventListener('click', () => {
-            videoContent.setAttribute('src', 'none');
+            videoContent.setAttribute('src', '');
             videoFrame.style.display = "none";
         });
     }
